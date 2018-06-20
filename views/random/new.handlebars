@@ -1,0 +1,21 @@
+{{#each errors}}
+<div class="alert alert-danger">{{text}}</div>
+{{else}} {{/each}}
+
+<div class="card card-body">
+  <h3 class="mb-3">Kontrollurval</h3>
+  <form action="/random" method="post">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="percentageId">%</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Skriv procentsats" aria-label="Procentsats" aria-describedby="percentage"
+        value="{{precentage}}" name="precentage">
+    </div>
+    <div class="form-group">
+      <label for="title">Här klistrar du in sökningen från Procapita</label>
+      <textarea name="random" class="form-control">{{random}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-danger">Ok</button>
+  </form>
+</div>
