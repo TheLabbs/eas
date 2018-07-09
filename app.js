@@ -46,7 +46,7 @@ app.post('/random', (req, res) => {
   let randomPost = req.body.precentage;
 
   if (!req.body.random) {
-    errors.push({ text: 'Var god klistra in besluten innan du trycker Ok' });
+    errors.push({ text: 'Var god klistra in sökresultat innan du trycker Ok' });
   }
   if (!req.body.precentage) {
     errors.push({ text: 'Ange procentsats innan du trycker Ok' });
