@@ -59,13 +59,13 @@ app.post('/random', (req, res) => {
       precentage: req.body.precentage
     });
   } else {
-    let lines = req.body.random.split('\n'); // lines is an array of strings
+    // lines is an array of strings
+    let lines = req.body.random.split('\n');
     // Loop through all lines
-
     for (let i = 0; i < lines.length; i++) {
       areaLines.push(lines[i]);
     }
-
+    // Get %-value from inputform
     randomPost = (randomPost / 100) * areaLines.length;
 
     for (let j = 0; j < randomPost; j++) {
