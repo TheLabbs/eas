@@ -62,15 +62,19 @@ app.post('/random', (req, res) => {
     // lines is an array of strings
     let lines = req.body.random.split('\n');
     // Loop through all lines
-    for (let i = 0; i < lines.length; i++) {
-      areaLines.push(lines[i]);
-    }
-    // Get %-value from inputform
-    randomPost = (randomPost / 100) * areaLines.length;
+    //for (let i = 0; i < lines.length; i++) {
+    //  areaLines.push(lines[i]);
+    // }
 
-    for (let j = 0; j < randomPost; j++) {
-      randomLines.push({ line: getRandomPost(areaLines) });
-    }
+    // Get %-value from inputform
+    randomPost = (randomPost / 100) * lines.length;
+
+    //for (let j = 0; j < randomPost; j++) {
+
+    randomLines = getRandomItems(lines, randomPost);
+
+    //  randomLines.push({ line: getRandomPost(lines) });
+    //}
 
     res.render('random/result', {
       randomlines: randomLines
@@ -78,9 +82,40 @@ app.post('/random', (req, res) => {
   }
 });
 
-function getRandomPost(collection) {
+/* function getRandomPost(collection) {
+  let ret = [];
+  let indexes = [];
   let keys = Array.from(collection);
-  return keys[Math.floor(Math.random() * keys.length)];
+  let indexI = Math.floor(Math.random() * keys.length);
+
+  if (indexes.indexOf(indexI) == -1) {
+    indexes[indexes.length] = indexI;
+    ret[ret.length] = collection[indexI];
+  }
+
+  return ret;
+} */
+
+function getRandomItems(arr, items) {
+  let ret = [];
+  let indexes = [];
+  let arr_length = arr.length;
+
+  // If we don't have enough items to return - return the original array
+  if (arr_length < items) {
+    return arr;
+  }
+
+  while (ret.length < items) {
+    let i = Math.floor(Math.random() * arr_length);
+    if (indexes.indexOf(i) == -1) {
+      indexes[indexes.length] = i;
+
+      // Add object prop line
+      ret.push({ line: arr[i] });
+    }
+  }
+  return ret;
 }
 
 const port = process.env.PORT || 5000;
