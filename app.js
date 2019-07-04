@@ -41,7 +41,6 @@ app.get('/random/new', (req, res) => {
 
 app.post('/random', (req, res) => {
   let errors = [];
-  let areaLines = [];
   let randomLines = [];
   let randomPost = req.body.precentage;
 
@@ -61,41 +60,21 @@ app.post('/random', (req, res) => {
   } else {
     // lines is an array of strings
     let lines = req.body.random.split('\n');
-    // Loop through all lines
-    //for (let i = 0; i < lines.length; i++) {
-    //  areaLines.push(lines[i]);
-    // }
-
+    
     // Get %-value from inputform
     randomPost = (randomPost / 100) * lines.length;
 
-    //for (let j = 0; j < randomPost; j++) {
+    
 
     randomLines = getRandomItems(lines, randomPost);
 
-    //  randomLines.push({ line: getRandomPost(lines) });
-    //}
+    
 
     res.render('random/result', {
       randomlines: randomLines
     });
   }
 });
-
-/* function getRandomPost(collection) {
-  let ret = [];
-  let indexes = [];
-  let keys = Array.from(collection);
-  let indexI = Math.floor(Math.random() * keys.length);
-
-  if (indexes.indexOf(indexI) == -1) {
-    indexes[indexes.length] = indexI;
-    ret[ret.length] = collection[indexI];
-  }
-
-  return ret;
-} */
-
 function getRandomItems(arr, items) {
   let ret = [];
   let indexes = [];
